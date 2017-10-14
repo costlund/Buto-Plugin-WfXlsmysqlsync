@@ -1,0 +1,62 @@
+settings:
+  layout:
+    - html
+    - main
+  title: XLS-MySql-Sync
+content:
+  frm_xls:
+    type: div
+    attribute: {class: row}
+    innerHTML:
+      -
+        type: div
+        attribute: {class: 'col-md-12'}
+        innerHTML:
+          -
+            type: form
+            attribute: {id: frm_xls, method: post, role: form}
+            innerHTML:
+              -
+                type: div
+                attribute: {class: form-group}
+                innerHTML:
+                  -
+                    type: label
+                    innerHTML: Cells from xls
+                  -
+                    type: textarea
+                    attribute: {name: xls, class: form-control}
+                    innerHTML: ''
+              -
+                type: button
+                attribute: {id: btn, onclick: "document.getElementById('frm_ajax').innerHTML='...'; $.post('/'+this.getAttribute('data-class')+'/run', $('#frm_xls').serialize()).done(function(data) { document.getElementById('frm_ajax').innerHTML=data;  });return false;", type: submit, class: 'btn btn-default'}
+                innerHTML: 'Run'
+  frm_ajax:
+    type: div
+    attribute: {class: row}
+    innerHTML:
+      -
+        type: div
+        attribute: {class: 'col-md-12'}
+        innerHTML:
+          -
+            type: div
+            attribute: {id: frm_ajax, class: well, style: 'margin-top:20px; heightzzz:300px'}
+            innerHTML: ''
+  help:
+    type: div
+    attribute: {class: row}
+    innerHTML:
+      -
+        type: div
+        attribute: {class: 'col-md-12'}
+        innerHTML: |
+          At least tree row copied from xls document.<br>
+          <ul>
+          <li>First row table name only.</li>
+          <li>Secound row field name in each cell.</li>
+          <li>There after row with data.</li>
+          </ul>
+  json:
+    type: script
+    innerHTML: 

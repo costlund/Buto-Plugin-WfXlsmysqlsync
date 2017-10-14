@@ -1,0 +1,16 @@
+settings:
+  fluit: true
+brand:
+  lable: 'Home'
+  href: '/'
+navbar:
+  -
+    class: 'navbar-right'
+    element:
+      type: p
+      attribute:
+        class: 'navbar-text'
+      innerHTML: 'globals:_SESSION/email'
+          
+    
+    

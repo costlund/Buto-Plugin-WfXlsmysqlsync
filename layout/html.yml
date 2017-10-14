@@ -1,0 +1,121 @@
+settings:
+  path: 'html/innerHTML/body/innerHTML'
+  rewrite_globals:
+    -
+      key: 'sys/settings/plugin/davegandy/fontawesome450/enabled'
+      value: true
+    -
+      key: 'sys/settings/plugin/wf/dom/enabled'
+      value: true
+    -
+      key: 'sys/settings/plugin/wf/bootstrap/enabled'
+      value: true
+    -
+      key: 'sys/settings/plugin/wf/ajax/enabled'
+      value: true
+    -
+      key: 'sys/settings/plugin/samstephenson/prototype/enabled'
+      value: true
+    -
+      key: 'sys/settings/plugin/wf/textareatab/enabled'
+      value: true
+    -
+      key: 'sys/settings/plugin/wf/callbackjson/enabled'
+      value: true
+    -
+      key: 'sys/settings/plugin/prism/prismjs/enabled'
+      value: true
+    -
+      key: 'sys/settings/plugin/wf/onkeypress/enabled'
+      value: true
+    -
+      key: 'sys/settings/plugin/wf/bootstrapjs/enabled'
+      value: true
+    
+content:
+  doctype:
+    type: text
+    text: '<!DOCTYPE html>'
+  html:
+    type: html
+    attribute:
+      lang: en
+    innerHTML:
+      head:
+        type: head
+        innerHTML:
+          prototype:
+            type: widget
+            settings:
+              disabled: true
+            data:
+              plugin: 'samstephenson/prototype'
+              method: include
+          wf_bootstrap:
+            type: widget
+            data:
+              plugin: 'wf/bootstrapjs'
+              method: include               
+          font_awesome_include:
+            type: widget
+            data:
+              plugin: 'davegandy/fontawesome450'
+              method: include
+          title:
+            type: title
+            innerHTML: 'globals:sys/page/settings/title'
+          twitter_bootstrap_meta:
+            type: widget
+            data:
+              plugin: 'twitter/bootstrap335v'
+              method: meta
+          twitter_bootstrap_link:
+            type: widget
+            data:
+              plugin: 'twitter/bootstrap335v'
+              method: link
+          wf_ajax:
+            type: widget
+            data:
+              plugin: 'wf/ajax'
+              method: include               
+          wf_dom:
+            type: widget
+            data:
+              plugin: 'wf/dom'
+              method: include               
+          twitter_bootstrap_js:
+            type: widget
+            data:
+              plugin: 'twitter/bootstrap335v'
+              method: js
+          wf_textareatab:
+            type: widget
+            data:
+              plugin: 'wf/textareatab'
+              method: include               
+          wf_callbackjson:
+            type: widget
+            data:
+              plugin: 'wf/callbackjson'
+              method: include               
+          prism_prismjs:
+            settings:
+              disabled: false
+            type: widget
+            data:
+              plugin: 'prism/prismjs'
+              method: include               
+          onkeypress:
+            type: widget
+            data:
+              plugin: 'wf/onkeypress'
+              method: include
+          own_css:
+            type: style
+            settings:
+              disabled: true
+            innerHTML: 'body.modal-open{ overflow: hidden; position: fixed; } '
+      body:
+        type: body
+        innerHTML: 'body...'
