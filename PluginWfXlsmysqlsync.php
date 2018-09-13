@@ -23,6 +23,13 @@ class PluginWfXlsmysqlsync{
    */
   public function page_start(){
     $desktop = $this->getYml('page/desktop.yml');
+    /**
+     * Insert admin layout from theme.
+     */
+    $desktop = wfDocument::insertAdminLayout($this->settings, 1, $desktop);
+    /**
+     * 
+     */
     $desktop->setById('btn', 'attribute/data-class', wfArray::get($GLOBALS, 'sys/class'));
     wfDocument::mergeLayout($desktop->get());
   }
