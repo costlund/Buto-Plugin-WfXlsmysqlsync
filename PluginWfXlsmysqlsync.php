@@ -9,7 +9,7 @@ class PluginWfXlsmysqlsync{
       if(!wfUser::hasRole("webmaster")){
         exit('Role webmaster is required!');
       }
-      wfArray::set($GLOBALS, 'sys/layout_path', '/plugin/wf/xlsmysqlsync/layout');
+      wfGlobals::setSys('layout_path', '/plugin/wf/xlsmysqlsync/layout');
       wfPlugin::includeonce('wf/array');
       $this->settings = new PluginWfArray(wfArray::get($GLOBALS, 'sys/settings/plugin_modules/'.wfArray::get($GLOBALS, 'sys/class').'/settings'));
       /**
@@ -102,12 +102,12 @@ class PluginWfXlsmysqlsync{
     foreach ($key_pri as $key => $value){
       $s .= "$value, ";
     }
-    $s = substr($s, 0, strlen($s)-2);
+    $s = wfPhpfunc::substr($s, 0, wfPhpfunc::strlen($s)-2);
     $s .= " from $table_name where ";
     foreach ($key_pri as $key => $value){
       $s .= "$value='?$value?' and ";
     }
-    $s = substr($s, 0, strlen($s)-5);
+    $s = wfPhpfunc::substr($s, 0, wfPhpfunc::strlen($s)-5);
     $s .= " limit 1;";
     $sql_check = $s;
     /**
@@ -117,12 +117,12 @@ class PluginWfXlsmysqlsync{
     foreach ($key_not_pri as $key => $value){
       $s .= "$value='?$value?', ";
     }
-    $s = substr($s, 0, strlen($s)-2);
+    $s = wfPhpfunc::substr($s, 0, wfPhpfunc::strlen($s)-2);
     $s .= " where ";
     foreach ($key_pri as $key => $value){
       $s .= "$value='?$value?' and ";
     }
-    $s = substr($s, 0, strlen($s)-5);
+    $s = wfPhpfunc::substr($s, 0, wfPhpfunc::strlen($s)-5);
     $s .= ";";
     $sql_update = $s;
     /**
@@ -135,7 +135,7 @@ class PluginWfXlsmysqlsync{
     foreach ($key_not_pri as $key => $value){
       $s .= "$value, ";
     }
-    $s = substr($s, 0, strlen($s)-2);
+    $s = wfPhpfunc::substr($s, 0, wfPhpfunc::strlen($s)-2);
     $s .= ") values (";
     foreach ($key_pri as $key => $value){
       $s .= "'?$value?', ";
@@ -143,7 +143,7 @@ class PluginWfXlsmysqlsync{
     foreach ($key_not_pri as $key => $value){
       $s .= "'?$value?', ";
     }
-    $s = substr($s, 0, strlen($s)-2);
+    $s = wfPhpfunc::substr($s, 0, wfPhpfunc::strlen($s)-2);
     $s .= ");";
     $sql_insert = $s;
     /**
@@ -158,7 +158,7 @@ class PluginWfXlsmysqlsync{
        */
       $s = $sql_check;
       foreach ($key_pri as $key2 => $value2){
-        $s = str_replace("?$value2?", $value[$key2], $s);
+        $s = wfPhpfunc::str_replace("?$value2?", $value[$key2], $s);
       }
       $rs = $this->runSQL($s);
       if(sizeof($rs->get())==0){
@@ -167,10 +167,10 @@ class PluginWfXlsmysqlsync{
          */
         $s = $sql_insert;
         foreach ($key_pri as $key2 => $value2){
-          $s = str_replace("?$value2?", $value[$key2], $s);
+          $s = wfPhpfunc::str_replace("?$value2?", $value[$key2], $s);
         }
         foreach ($key_not_pri as $key2 => $value2){
-          $s = str_replace("?$value2?", $value[$key2], $s);
+          $s = wfPhpfunc::str_replace("?$value2?", $value[$key2], $s);
         }
         $sql[] = $s;
         $this->runSQL($s);
@@ -180,14 +180,14 @@ class PluginWfXlsmysqlsync{
          */
         $s = $sql_update;
         foreach ($key_pri as $key2 => $value2){
-          $s = str_replace("?$value2?", $value[$key2], $s);
+          $s = wfPhpfunc::str_replace("?$value2?", $value[$key2], $s);
         }
         foreach ($key_not_pri as $key2 => $value2){
           if(isset($value[$key2])){
-            $s = str_replace("?$value2?", $value[$key2], $s);
+            $s = wfPhpfunc::str_replace("?$value2?", $value[$key2], $s);
           }else{
             // Last rows last column does not exist if it is empty...
-            $s = str_replace("?$value2?", '', $s);
+            $s = wfPhpfunc::str_replace("?$value2?", '', $s);
           }
         }
         $sql[] = $s;
@@ -216,7 +216,7 @@ class PluginWfXlsmysqlsync{
       if($key==0){
         $name = $value;
       }else{
-        if(strlen($value)){
+        if(wfPhpfunc::strlen($value)){
           /**
            * Name of table should only be in first column. If else there is an error.
            */
